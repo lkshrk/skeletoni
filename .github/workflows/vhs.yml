@@ -1,0 +1,38 @@
+name: VHS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - demo/*.tape
+  workflow_dispatch:
+
+jobs:
+  vhs:
+    name: Render Demo GIF
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Render
+        uses: charmbracelet/vhs-action@v2
+        with:
+          path: demo/preview.tape
+
+      - name: Commit GIF
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'chore: update demo gif [skip ci]'
+          add: demo/preview.gif
