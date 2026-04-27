@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Set up environment
+        run: cp .env.example .env
+
       - name: Type check
         run: pnpm check
 
