@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history required so git diff can compare against base commits.
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
         with:
@@ -47,8 +50,23 @@ jobs:
       - name: Functional e2e tests
         run: pnpm test:e2e:functional
 
+      - name: Detect affected visual routes
+        id: affected
+        env:
+          # On PRs use the PR base; on push use the before-SHA; fall back to HEAD~1.
+          BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before || 'HEAD~1' }}
+        run: node --experimental-strip-types scripts/affected-routes.ts "$BASE_SHA"
+
       - name: Visual regression
-        run: pnpm test:e2e:visual
+        if: steps.affected.outputs.run == 'true'
+        env:
+          VISUAL_GREP: ${{ steps.affected.outputs.grep }}
+        run: |
+          if [ -n "$VISUAL_GREP" ]; then
+            pnpm test:e2e:visual --grep "$VISUAL_GREP"
+          else
+            pnpm test:e2e:visual
+          fi
         continue-on-error: true
 
       - name: Upload playwright report
