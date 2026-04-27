@@ -1,9 +1,13 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
+	import { theme } from '$lib/theme.svelte.js';
 	import MenuIcon from '@lucide/svelte/icons/menu';
+	import MoonIcon from '@lucide/svelte/icons/moon';
+	import SunIcon from '@lucide/svelte/icons/sun';
 
 	const navLinks = [
 		{ href: '/', label: 'Home' },
@@ -13,8 +17,12 @@
 
 	let sheetOpen = $state(false);
 
+	onMount(() => theme.init());
+
 	function activeClass(href: string) {
-		return page.url.pathname === href ? 'text-brand font-medium' : '';
+		const active =
+			href === '/' ? page.url.pathname === '/' : page.url.pathname.startsWith(href);
+		return active ? 'text-brand font-medium' : '';
 	}
 </script>
 
@@ -36,6 +44,20 @@
 		</nav>
 
 		<div class="flex-1"></div>
+
+		<!-- Theme toggle -->
+		<Button
+			variant="ghost"
+			size="icon"
+			onclick={() => theme.toggle()}
+			aria-label={theme.dark ? 'Switch to light mode' : 'Switch to dark mode'}
+		>
+			{#if theme.dark}
+				<SunIcon class="size-4" />
+			{:else}
+				<MoonIcon class="size-4" />
+			{/if}
+		</Button>
 
 		<!-- Mobile nav — wrapper controls visibility, not bits-ui trigger -->
 		<div class="md:hidden">
