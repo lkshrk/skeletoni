@@ -123,3 +123,7 @@ tramp
 # (keep Dockerfile and compose files — ignore generated certs/secrets)
 *.pem
 docker-compose.override.yml
+
+# ─── Preview GIF ──────────────────────────────────────────────────────────────
+# Captured frames are ephemeral — only the compiled GIF is committed.
+demo/frames/

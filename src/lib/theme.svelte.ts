@@ -20,7 +20,7 @@ function createTheme() {
 			} catch {
 				// private browsing or storage quota — silent fail
 			}
-		},
+		}
 	};
 }
 

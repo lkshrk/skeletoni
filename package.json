@@ -19,6 +19,7 @@
 		"test:e2e": "playwright test",
 		"test:e2e:functional": "playwright test --project=functional",
 		"test:e2e:visual": "playwright test --project=visual",
+		"preview:gif": "node --experimental-strip-types scripts/preview.ts",
 		"release": "semantic-release"
 	},
 	"dependencies": {
