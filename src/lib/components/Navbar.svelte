@@ -19,7 +19,7 @@
 </script>
 
 <header
-	class="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur"
+	class="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b shadow-sm backdrop-blur"
 >
 	<div class="mx-auto flex h-14 max-w-5xl items-center px-4">
 		<a href={resolve('/')} class="mr-6 flex shrink-0 items-center gap-2 font-semibold text-brand">
