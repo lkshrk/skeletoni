@@ -14,6 +14,8 @@
 	<title>{title}</title>
 	<meta name="description" content={page.data.meta.description} />
 	<link rel="canonical" href={canonical} />
+	<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+	<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
 </svelte:head>
 
 {@render children()}
