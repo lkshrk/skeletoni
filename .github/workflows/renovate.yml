@@ -4,11 +4,22 @@ on:
   schedule:
     - cron: '0 4 * * 1' # every Monday at 04:00 UTC
   workflow_dispatch:
+  issues:
+    types: [edited]
 
 jobs:
   renovate:
     name: Renovate
     runs-on: ubuntu-latest
+    # Always run on schedule / manual trigger.
+    # On issue edits: only fire when a checkbox in the Renovate Dependency
+    # Dashboard is checked (the dashboard issue is authored by renovate[bot]).
+    if: |
+      github.event_name != 'issues' ||
+      (
+        github.event.issue.user.login == 'renovate[bot]' &&
+        contains(github.event.issue.body, '- [x]')
+      )
     steps:
       - uses: actions/checkout@v4
 
