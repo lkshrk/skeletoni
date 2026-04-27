@@ -2,7 +2,11 @@ import { expect, test } from '@playwright/test';
 
 // Tests are named by URL path so affected-routes.ts can filter them with
 // --grep. Add a new entry here whenever a new route is added to the app.
-const routes = [{ path: '/', snapshot: 'home' }] as const;
+const routes = [
+	{ path: '/', snapshot: 'home' },
+	{ path: '/about', snapshot: 'about' },
+	{ path: '/docs', snapshot: 'docs' },
+] as const;
 
 for (const { path, snapshot } of routes) {
 	test(path, async ({ page }) => {
