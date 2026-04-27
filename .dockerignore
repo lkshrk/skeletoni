@@ -1,0 +1,31 @@
+.git/
+.gitignore
+node_modules/
+build/
+.svelte-kit/
+coverage/
+test-results/
+playwright-report/
+tests/
+.env*
+!.env.example
+
+# Meta & tooling — not needed in image
+.claude/
+.wolf/
+.omc/
+.taskless/
+.github/
+demo/
+renovate.json
+.releaserc.json
+CHANGELOG.md
+*.md
+
+# Dev configs
+.prettierrc
+.prettierignore
+eslint.config.js
+playwright.config.ts
+vitest.config.ts
+tsconfig.json
