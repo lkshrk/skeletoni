@@ -14,7 +14,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"test": "vitest run"
 	},
 	"dependencies": {
 		"@sveltejs/kit": "^2.58.0",
@@ -32,6 +33,7 @@
 		"tailwindcss": "^4.2.4",
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.59.0",
-		"vite": "^8.0.10"
+		"vite": "^8.0.10",
+		"vitest": "^4.1.5"
 	}
 }
