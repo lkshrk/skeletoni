@@ -3,6 +3,8 @@
 	import { page } from '$app/state';
 	import { env } from '$env/dynamic/public';
 	import { formatTitle } from '$lib/meta';
+	import Navbar from '$lib/components/Navbar.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 
 	const { children } = $props();
 
@@ -18,4 +20,10 @@
 	<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
 </svelte:head>
 
-{@render children()}
+<div class="flex min-h-svh flex-col">
+	<Navbar />
+	<main class="flex-1">
+		{@render children()}
+	</main>
+	<Footer />
+</div>
