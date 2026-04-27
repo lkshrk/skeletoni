@@ -18,6 +18,10 @@
 	<link rel="canonical" href={canonical} />
 	<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 	<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={page.data.meta.description} />
+	<meta property="og:url" content={canonical} />
+	<meta property="og:type" content="website" />
 </svelte:head>
 
 <div class="flex min-h-svh flex-col">

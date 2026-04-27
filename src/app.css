@@ -109,6 +109,14 @@
 @layer base {
 	* {
 		@apply border-border;
+		/* Smooth theme transitions on every element.
+		   200ms is fast enough that hover effects (which Tailwind sets explicitly)
+		   don't feel sluggish — component-level transitions override this via
+		   higher specificity. */
+		transition:
+			background-color 200ms ease,
+			color 200ms ease,
+			border-color 200ms ease;
 	}
 
 	body {
