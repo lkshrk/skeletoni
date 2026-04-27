@@ -21,8 +21,14 @@
 </svelte:head>
 
 <div class="flex min-h-svh flex-col">
+	<a
+		href="#main-content"
+		class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-brand focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:text-brand-foreground focus:outline-none"
+	>
+		Skip to content
+	</a>
 	<Navbar />
-	<main class="flex-1">
+	<main id="main-content" class="flex-1">
 		<div class="mx-auto max-w-5xl px-4 py-8">
 			{@render children()}
 		</div>
