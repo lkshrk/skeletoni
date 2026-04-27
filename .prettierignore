@@ -6,6 +6,7 @@ coverage/
 pnpm-lock.yaml
 CHANGELOG.md
 .env*
+static/
 .claude/
 .wolf/
 .omc/
