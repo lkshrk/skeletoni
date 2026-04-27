@@ -23,7 +23,9 @@
 <div class="flex min-h-svh flex-col">
 	<Navbar />
 	<main class="flex-1">
-		{@render children()}
+		<div class="mx-auto max-w-5xl px-4 py-8">
+			{@render children()}
+		</div>
 	</main>
 	<Footer />
 </div>
