@@ -1,0 +1,125 @@
+# ─── Build & Output ───────────────────────────────────────────────────────────
+build/
+dist/
+.output/
+.svelte-kit/
+
+# ─── Dependencies ─────────────────────────────────────────────────────────────
+node_modules/
+
+# ─── Lock files (pnpm is canonical) ──────────────────────────────────────────
+package-lock.json
+yarn.lock
+
+# ─── Environment ──────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ─── Testing ──────────────────────────────────────────────────────────────────
+/test-results/
+/playwright-report/
+/playwright/.cache/
+coverage/
+
+# ─── Deployment targets ───────────────────────────────────────────────────────
+.vercel/
+.netlify/
+.cloudflare/
+
+# ─── OS — macOS ───────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon
+
+# ─── OS — Windows ─────────────────────────────────────────────────────────────
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ─── OS — Linux ───────────────────────────────────────────────────────────────
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ─── Editors — VS Code ────────────────────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+*.code-workspace
+
+# ─── Editors — JetBrains (WebStorm, IDEA, etc.) ──────────────────────────────
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# ─── Editors — Vim / Neovim ───────────────────────────────────────────────────
+*.swp
+*.swo
+*~
+Session.vim
+.netrwhist
+
+# ─── Editors — Emacs ──────────────────────────────────────────────────────────
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ─── Editors — Sublime Text ───────────────────────────────────────────────────
+*.sublime-workspace
+
+# ─── AI tools — cache & personal state (NOT project rules) ───────────────────
+# Aider
+.aider.input.history
+.aider.chat.history.md
+.aider.tags.cache.*
+
+# Continue
+.continue/models/
+.continue/sessions/
+
+# Cursor — personal state only (keep .cursorrules, .cursorignore if present)
+.cursor/chat/
+.cursor/logs/
+
+# Codeium
+.codeium/
+
+# ─── Tooling ──────────────────────────────────────────────────────────────────
+.cache/
+.tmp/
+*.tgz
+*.tsbuildinfo
+
+# ─── Docker ───────────────────────────────────────────────────────────────────
+# (keep Dockerfile and compose files — ignore generated certs/secrets)
+*.pem
+docker-compose.override.yml
