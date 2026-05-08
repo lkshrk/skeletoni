@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/lkshrk/skeletoni/compare/v1.0.0...v1.1.0) (2026-05-08)
+
+
+### Features
+
+* add post-clone setup script for template usage ([6cd39e3](https://github.com/lkshrk/skeletoni/commit/6cd39e388a4db32b1520b2f28534a36bbb2dadaf))
+
 # 1.0.0 (2026-05-08)
 
 
