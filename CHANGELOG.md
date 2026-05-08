@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/lkshrk/skeletoni/compare/v1.1.1...v1.1.2) (2026-05-08)
+
+
+### Bug Fixes
+
+* pass repo and gitAuthor via env vars instead of global config ([ac01e7f](https://github.com/lkshrk/skeletoni/commit/ac01e7f2b063446d5fcc6c55ec0e1e37675042f9))
+
 ## [1.1.1](https://github.com/lkshrk/skeletoni/compare/v1.1.0...v1.1.1) (2026-05-08)
 
 
