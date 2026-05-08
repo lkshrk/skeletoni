@@ -4,21 +4,38 @@ on:
   schedule:
     - cron: '0 4 * * 1' # every Monday at 04:00 UTC
   workflow_dispatch:
+  # Re-run when CI succeeds on a Renovate PR branch → automerge kicks in.
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+  # Re-run when a dashboard checkbox is toggled.
   issues:
+    types: [edited]
+  # Re-run when a checkbox in a Renovate PR is toggled (rebase/retry).
+  pull_request:
     types: [edited]
 
 jobs:
   renovate:
     name: Renovate
     runs-on: ubuntu-latest
-    # Always run on schedule / manual trigger.
-    # On issue edits: only fire when a checkbox in the Renovate Dependency
-    # Dashboard is checked (the dashboard issue is authored by renovate[bot]).
     if: |
-      github.event_name != 'issues' ||
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch' ||
       (
+        github.event_name == 'workflow_run' &&
+        github.event.workflow_run.conclusion == 'success' &&
+        startsWith(github.event.workflow_run.head_branch, 'renovate/')
+      ) ||
+      (
+        github.event_name == 'issues' &&
         github.event.issue.user.login == 'renovate[bot]' &&
         contains(github.event.issue.body, '- [x]')
+      ) ||
+      (
+        github.event_name == 'pull_request' &&
+        github.event.pull_request.user.login == 'renovate[bot]' &&
+        contains(github.event.pull_request.body, '- [x]')
       )
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
