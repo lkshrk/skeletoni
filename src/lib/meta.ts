@@ -11,6 +11,6 @@ export const defaultMeta: Meta = {
 };
 
 export function formatTitle(pageTitle: string, siteName: string): string {
-	if (pageTitle === siteName) return siteName;
+	if (!siteName || pageTitle === siteName) return pageTitle;
 	return `${pageTitle} | ${siteName}`;
 }

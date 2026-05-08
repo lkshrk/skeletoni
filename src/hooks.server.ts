@@ -2,6 +2,8 @@ import type { Handle } from '@sveltejs/kit';
 
 // CSP (including nonce injection for SvelteKit's inline scripts) is configured
 // in svelte.config.js → kit.csp. This hook handles the remaining headers.
+// HSTS is intentionally omitted — set it in your reverse proxy (nginx/Caddy/Cloudflare):
+// Strict-Transport-Security: max-age=31536000; includeSubDomains
 export const handle: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event);
 

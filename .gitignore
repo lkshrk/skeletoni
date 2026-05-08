@@ -97,6 +97,18 @@ tramp
 *.sublime-workspace
 
 # ─── AI tools — cache & personal state (NOT project rules) ───────────────────
+# Claude Code
+.claude/
+
+# OpenWolf
+.wolf/
+
+# oh-my-claudecode
+.omc/
+
+# Taskless
+.taskless/
+
 # Aider
 .aider.input.history
 .aider.chat.history.md

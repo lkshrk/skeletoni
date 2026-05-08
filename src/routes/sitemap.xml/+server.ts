@@ -1,10 +1,18 @@
 import type { RequestHandler } from './$types';
 import { env } from '$env/dynamic/public';
 
-const routes = ['/'] as const;
+const routes = ['/', '/about', '/docs'] as const;
+
+function escapeXml(str: string): string {
+	return str
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;');
+}
 
 export const GET: RequestHandler = () => {
-	const baseUrl = env.PUBLIC_BASE_URL;
+	const baseUrl = escapeXml(env.PUBLIC_BASE_URL);
 	const today = new Date().toISOString().slice(0, 10);
 
 	const urls = routes

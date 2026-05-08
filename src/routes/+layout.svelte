@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import '../app.css';
 	import { page } from '$app/state';
 	import { env } from '$env/dynamic/public';
 	import { formatTitle } from '$lib/meta';
+	import { theme } from '$lib/theme.svelte.js';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 
@@ -10,6 +12,8 @@
 
 	const title = $derived(formatTitle(page.data.meta.title, env.PUBLIC_SITE_NAME));
 	const canonical = $derived(`${env.PUBLIC_BASE_URL}${page.url.pathname}`);
+
+	onMount(() => theme.init());
 </script>
 
 <svelte:head>
