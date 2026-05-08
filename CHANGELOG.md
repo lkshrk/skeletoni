@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/lkshrk/skeletoni/compare/v1.1.0...v1.1.1) (2026-05-08)
+
+
+### Bug Fixes
+
+* add global config with repository for self-hosted Renovate ([2b1d76c](https://github.com/lkshrk/skeletoni/commit/2b1d76c055cb1435c07cf9bbc77020fef9c31863))
+
 # [1.1.0](https://github.com/lkshrk/skeletoni/compare/v1.0.0...v1.1.0) (2026-05-08)
 
 
