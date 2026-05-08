@@ -30,6 +30,22 @@ Every dependency earns its place. Nothing speculative.
 
 ---
 
+## Use as Template
+
+Click **"Use this template"** on GitHub, or:
+
+```bash
+gh repo create my-app --template lkshrk/skeletoni --public --clone
+cd my-app
+bash scripts/setup.sh
+pnpm install
+pnpm dev
+```
+
+The setup script prompts for project name, display name, emoji, and description — then replaces all template placeholders across the codebase and self-deletes.
+
+---
+
 ## Setup
 
 ### Prerequisites
