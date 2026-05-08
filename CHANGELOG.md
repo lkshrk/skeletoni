@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/lkshrk/skeletoni/compare/v1.1.2...v1.2.0) (2026-05-08)
+
+
+### Features
+
+* trigger Renovate on CI green and PR/dashboard checkboxes ([108d6a5](https://github.com/lkshrk/skeletoni/commit/108d6a50c6c37e565b29874a66569490e537bb90))
+
 ## [1.1.2](https://github.com/lkshrk/skeletoni/compare/v1.1.1...v1.1.2) (2026-05-08)
 
 
