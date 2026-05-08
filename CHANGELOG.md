@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/lkshrk/skeletoni/compare/v1.2.0...v1.2.1) (2026-05-08)
+
+
+### Bug Fixes
+
+* document all required RENOVATE_TOKEN permissions ([e2e6f82](https://github.com/lkshrk/skeletoni/commit/e2e6f8211e756363363faafa7ab0d4ab53ed122d))
+
 # [1.2.0](https://github.com/lkshrk/skeletoni/compare/v1.1.2...v1.2.0) (2026-05-08)
 
 
