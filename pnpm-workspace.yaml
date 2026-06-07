@@ -1,0 +1,8 @@
+# Decide which dependency build/postinstall scripts may run (pnpm blocks others
+# by default and errors on undecided ones). sharp is left unbuilt — its native
+# binary isn't needed for the e2e suite and its source build is fragile.
+allowBuilds:
+  '@google/genai': true
+  lefthook: true
+  protobufjs: true
+  sharp: false
