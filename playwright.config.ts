@@ -11,6 +11,9 @@ export default defineConfig({
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
 	reporter: process.env.CI ? [['github'], ...shiplight.reporter] : shiplight.reporter,
+	// Absorb sub-percent font/anti-aliasing differences between the local (darwin)
+	// and CI (linux) renderers. Local-vs-local comparisons stay effectively exact.
+	expect: { toHaveScreenshot: { maxDiffPixelRatio: 0.02 } },
 	use: {
 		baseURL: 'http://localhost:4173',
 		trace: 'on-first-retry'
