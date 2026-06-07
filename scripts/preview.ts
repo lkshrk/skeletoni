@@ -23,7 +23,7 @@ const slides = [
 	{ path: '/', file: '01-home-light.png', dark: false },
 	{ path: '/about', file: '02-about-light.png', dark: false },
 	{ path: '/docs', file: '03-docs-light.png', dark: false },
-	{ path: '/', file: '04-home-dark.png', dark: true },
+	{ path: '/', file: '04-home-dark.png', dark: true }
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -71,7 +71,7 @@ mkdirSync(FRAMES_DIR, { recursive: true });
 log('Starting preview server…');
 server = spawn('pnpm', ['preview', '--port', String(PORT)], {
 	stdio: 'ignore',
-	detached: false,
+	detached: false
 });
 
 await waitFor(BASE_URL);
@@ -115,7 +115,7 @@ execSync(
 		'ffmpeg -y',
 		`-f concat -safe 0 -i "${CONCAT_FILE}"`,
 		'-vf "fps=8,scale=1280:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=bayer:bayer_scale=5"',
-		`"${GIF_OUT}"`,
+		`"${GIF_OUT}"`
 	].join(' '),
 	{ stdio: 'inherit' }
 );

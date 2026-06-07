@@ -11,14 +11,13 @@
 	const navLinks = [
 		{ href: '/', label: 'Home' },
 		{ href: '/about', label: 'About' },
-		{ href: '/docs', label: 'Docs' },
+		{ href: '/docs', label: 'Docs' }
 	] as const;
 
 	let sheetOpen = $state(false);
 
 	function activeClass(href: string) {
-		const active =
-			href === '/' ? page.url.pathname === '/' : page.url.pathname.startsWith(href);
+		const active = href === '/' ? page.url.pathname === '/' : page.url.pathname.startsWith(href);
 		return active ? 'text-brand font-medium' : '';
 	}
 </script>
