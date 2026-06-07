@@ -1,0 +1,31 @@
+name: mobile nav
+tags: [functional]
+
+use:
+  viewport: { width: 390, height: 844 }
+
+suite:
+  tests:
+    - name: hamburger is visible and desktop nav is hidden
+      statements:
+        - URL: /
+        - VERIFY: Toggle menu button is visible
+          js: "await expect(page.getByRole('button', { name: 'Toggle menu' })).toBeVisible()"
+        - VERIFY: Main navigation is hidden
+          js: "await expect(page.getByRole('navigation', { name: 'Main' })).not.toBeVisible()"
+
+    - name: sheet opens on hamburger click and closes after nav
+      statements:
+        - URL: /
+        - intent: Open the mobile menu
+          action: click
+          locator: "getByRole('button', { name: 'Toggle menu' })"
+        - VERIFY: Mobile navigation is visible
+          js: "await expect(page.getByRole('navigation', { name: 'Mobile' })).toBeVisible()"
+        - intent: Click About in the mobile nav
+          action: click
+          locator: "getByRole('navigation', { name: 'Mobile' }).getByRole('link', { name: 'About' })"
+        - VERIFY: URL is /about
+          js: "await expect(page).toHaveURL('/about')"
+        - VERIFY: Mobile navigation is hidden
+          js: "await expect(page.getByRole('navigation', { name: 'Mobile' })).not.toBeVisible()"

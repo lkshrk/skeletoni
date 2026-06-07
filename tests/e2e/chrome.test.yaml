@@ -1,0 +1,46 @@
+name: chrome
+tags: [functional]
+
+suite:
+  tests:
+    - name: footer renders with nav landmark
+      statements:
+        - URL: /
+        - VERIFY: Footer contentinfo landmark is visible
+          js: "await expect(page.getByRole('contentinfo')).toBeVisible()"
+        - VERIFY: Footer navigation is visible
+          js: "await expect(page.getByRole('navigation', { name: 'Footer' })).toBeVisible()"
+
+    - name: skip link becomes focused on first Tab
+      statements:
+        - URL: /
+        - intent: Press Tab to move focus to the skip link
+          action: press
+          keys: Tab
+        - VERIFY: Skip to content link is focused
+          js: "await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused()"
+
+    - name: dark mode toggle flips the dark class on html
+      statements:
+        - URL: /
+        - description: Toggle the theme and assert the html.dark class flips
+          js: |
+            const html = page.locator('html');
+            const wasDark = await html.evaluate((el) => el.classList.contains('dark'));
+            const label = wasDark ? 'Switch to light mode' : 'Switch to dark mode';
+            await page.getByRole('button', { name: label }).click();
+            const isDark = await html.evaluate((el) => el.classList.contains('dark'));
+            expect(isDark).toBe(!wasDark);
+
+    - name: dark mode persists across hard reload via localStorage
+      statements:
+        - URL: /
+        - description: Force dark mode on, reload, and assert it persisted
+          js: |
+            const html = page.locator('html');
+            const isDark = await html.evaluate((el) => el.classList.contains('dark'));
+            if (!isDark) {
+              await page.getByRole('button', { name: 'Switch to dark mode' }).click();
+            }
+            await page.reload();
+            await expect(html).toHaveClass(/dark/);

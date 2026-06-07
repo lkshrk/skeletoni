@@ -216,8 +216,10 @@ if (affectedRouteFiles.length === 0) {
 const urlPaths = [...new Set(affectedRouteFiles.map(routeFileToUrlPath))];
 
 // Visual tests are named by their URL path (e.g. test('/', ...)).
-// Build an OR-pattern with anchors so '/about' doesn't match '/'.
-const pattern = urlPaths.map((p) => `^${escapeRegex(p)}$`).join('|');
+// Playwright greps against `<file> <title> <tags>` joined by spaces, so the
+// route title is the final token — anchor on a leading boundary + end so
+// '/about' doesn't match '/' and the file-path prefix doesn't defeat the match.
+const pattern = urlPaths.map((p) => `(?:^|\\s)${escapeRegex(p)}$`).join('|');
 
 emit('run', 'true');
 emit('grep', pattern);

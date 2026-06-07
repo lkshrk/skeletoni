@@ -139,3 +139,10 @@ docker-compose.override.yml
 # ─── Preview GIF ──────────────────────────────────────────────────────────────
 # Captured frames are ephemeral — only the compiled GIF is committed.
 demo/frames/
+
+# ─── Shiplight ────────────────────────────────────────────────────────────────
+# Transpiled Playwright specs are build artifacts — regenerated from *.test.yaml.
+*.yaml.spec.ts
+shiplight-report/
+.shiplight/
+.auth

@@ -1,0 +1,32 @@
+name: navigation
+tags: [functional]
+
+suite:
+  tests:
+    - name: home page heading visible
+      statements:
+        - URL: /
+        - VERIFY: A level-1 heading is visible
+          js: "await expect(page.getByRole('heading', { level: 1 })).toBeVisible()"
+
+    - name: navigates to /about
+      statements:
+        - URL: /
+        - intent: Click the About link in the main nav
+          action: click
+          locator: "getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'About' })"
+        - VERIFY: URL is /about
+          js: "await expect(page).toHaveURL('/about')"
+        - VERIFY: About heading is visible
+          js: "await expect(page.getByRole('heading', { name: 'About' })).toBeVisible()"
+
+    - name: navigates to /docs
+      statements:
+        - URL: /
+        - intent: Click the Docs link in the main nav
+          action: click
+          locator: "getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Docs' })"
+        - VERIFY: URL is /docs
+          js: "await expect(page).toHaveURL('/docs')"
+        - VERIFY: Docs heading is visible
+          js: "await expect(page.getByRole('heading', { name: 'Docs' })).toBeVisible()"

@@ -1,0 +1,10 @@
+# Test title MUST equal the URL path — scripts/affected-routes.ts greps by route.
+goal: '/docs'
+
+use:
+  viewport: { width: 1280, height: 720 }
+
+statements:
+  - URL: /docs
+  - description: Full-page visual snapshot of the docs route
+    js: "await expect(page).toHaveScreenshot('docs.png', { fullPage: true })"

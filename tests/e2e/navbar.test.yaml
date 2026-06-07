@@ -1,0 +1,26 @@
+name: navbar
+tags: [functional]
+
+suite:
+  tests:
+    - name: renders logo and all nav links
+      statements:
+        - URL: /
+        - VERIFY: Skeletoni logo link is visible
+          js: "await expect(page.getByRole('link', { name: /skeletoni/i }).first()).toBeVisible()"
+        - VERIFY: Main navigation is visible
+          js: "await expect(page.getByRole('navigation', { name: 'Main' })).toBeVisible()"
+        - VERIFY: Home link is visible in the main nav
+          js: "await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Home' })).toBeVisible()"
+        - VERIFY: About link is visible in the main nav
+          js: "await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'About' })).toBeVisible()"
+        - VERIFY: Docs link is visible in the main nav
+          js: "await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Docs' })).toBeVisible()"
+
+    - name: highlights active link on current page
+      statements:
+        - URL: /about
+        - VERIFY: About link is marked active with the brand color
+          js: "await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'About' })).toHaveClass(/text-brand/)"
+        - VERIFY: Home link is not marked active
+          js: "await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Home' })).not.toHaveClass(/text-brand/)"

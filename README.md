@@ -9,24 +9,25 @@ Every dependency earns its place. Nothing speculative.
 
 ## Stack
 
-| Responsibility | Tool | Notes |
-|---|---|---|
-| Framework | [SvelteKit 5](https://svelte.dev/docs/kit) | File-based routing, SSR, `+page`, `+layout`, `+server` |
-| Language | [TypeScript (strict)](https://www.typescriptlang.org/) | Zero runtime cost; `any` is banned |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com/) | Utility-first; design tokens via OKLCH CSS vars |
-| Components | [shadcn-svelte](https://www.shadcn-svelte.com/) | Copy-owned components; no runtime dependency bloat |
-| Component primitives | [bits-ui](https://bits-ui.com/) | Headless, accessible primitives backing shadcn-svelte |
-| Icons | [lucide-svelte](https://lucide.dev/) | Svelte 5-native icon components |
-| Linting | [ESLint](https://eslint.org/) + [eslint-plugin-svelte](https://sveltejs.github.io/eslint-plugin-svelte/) | Svelte-aware lint rules |
-| Formatting | [Prettier](https://prettier.io/) + [prettier-plugin-svelte](https://github.com/sveltejs/prettier-plugin-svelte) | Consistent code style across `.svelte`, `.ts`, `.css` |
-| Type checking | [svelte-check](https://github.com/sveltejs/language-tools/tree/master/packages/svelte-check) | SvelteKit-aware TypeScript checking |
-| Unit tests | [Vitest](https://vitest.dev/) | Vite-native, fast, ESM-first |
-| E2E tests | [Playwright](https://playwright.dev/) | Functional + visual screenshot comparison |
-| Bundler | [Vite](https://vite.dev/) | Dev server with HMR, optimised production build |
-| Server adapter | [@sveltejs/adapter-node](https://svelte.dev/docs/kit/adapter-node) | Standalone Node.js server — Docker-friendly |
-| Containerisation | [Docker](https://www.docker.com/) | Multi-stage build, non-root user, Node 22 |
-| Releases | [semantic-release](https://semantic-release.gitbook.io/semantic-release/) | Automated versioning from Conventional Commits |
-| Dependency updates | [Renovate](https://docs.renovatebot.com/) | Automated PRs to keep deps fresh |
+| Responsibility       | Tool                                                                                                            | Notes                                                                                                     |
+| -------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Framework            | [SvelteKit 5](https://svelte.dev/docs/kit)                                                                      | File-based routing, SSR, `+page`, `+layout`, `+server`                                                    |
+| Language             | [TypeScript (strict)](https://www.typescriptlang.org/)                                                          | Zero runtime cost; `any` is banned                                                                        |
+| Styling              | [Tailwind CSS v4](https://tailwindcss.com/)                                                                     | Utility-first; design tokens via OKLCH CSS vars                                                           |
+| Components           | [shadcn-svelte](https://www.shadcn-svelte.com/)                                                                 | Copy-owned components; no runtime dependency bloat                                                        |
+| Component primitives | [bits-ui](https://bits-ui.com/)                                                                                 | Headless, accessible primitives backing shadcn-svelte                                                     |
+| Icons                | [lucide-svelte](https://lucide.dev/)                                                                            | Svelte 5-native icon components                                                                           |
+| Linting              | [ESLint](https://eslint.org/) + [eslint-plugin-svelte](https://sveltejs.github.io/eslint-plugin-svelte/)        | Svelte-aware lint rules                                                                                   |
+| Formatting           | [Prettier](https://prettier.io/) + [prettier-plugin-svelte](https://github.com/sveltejs/prettier-plugin-svelte) | Consistent code style across `.svelte`, `.ts`, `.css`                                                     |
+| Type checking        | [svelte-check](https://github.com/sveltejs/language-tools/tree/master/packages/svelte-check)                    | SvelteKit-aware TypeScript checking                                                                       |
+| Unit tests           | [Vitest](https://vitest.dev/)                                                                                   | Vite-native, fast, ESM-first                                                                              |
+| E2E tests            | [Shiplight](https://shiplight.ai/)                                                                              | YAML tests transpiled to [Playwright](https://playwright.dev/); functional + visual screenshot comparison |
+| Git hooks            | [Lefthook](https://lefthook.dev/)                                                                               | Pre-push runs `check`, `lint`, format check                                                               |
+| Bundler              | [Vite](https://vite.dev/)                                                                                       | Dev server with HMR, optimised production build                                                           |
+| Server adapter       | [@sveltejs/adapter-node](https://svelte.dev/docs/kit/adapter-node)                                              | Standalone Node.js server — Docker-friendly                                                               |
+| Containerisation     | [Docker](https://www.docker.com/)                                                                               | Multi-stage build, non-root user, Node 22                                                                 |
+| Releases             | [semantic-release](https://semantic-release.gitbook.io/semantic-release/)                                       | Automated versioning from Conventional Commits                                                            |
+| Dependency updates   | [Renovate](https://docs.renovatebot.com/)                                                                       | Automated PRs to keep deps fresh                                                                          |
 
 ---
 
@@ -97,11 +98,14 @@ Open [http://localhost:5173](http://localhost:5173).
 pnpm check          # TypeScript + Svelte type checking
 pnpm lint           # ESLint
 pnpm test           # Vitest unit tests
-pnpm test:e2e       # Playwright E2E (functional + visual)
+pnpm test:e2e       # Shiplight E2E (functional + visual)
 ```
 
-Visual snapshot tests write baseline PNGs to `tests/e2e/__snapshots__/` on first run.
-Commit the snapshots — CI compares against them on every push.
+E2E tests are authored as `*.test.yaml` (see `tests/e2e/`) and transpiled to
+Playwright specs on run. The generated `*.yaml.spec.ts` files are build artifacts
+(git-ignored). Visual snapshot baselines live next to each spec in
+`*-snapshots/` — commit them; CI compares against them on every push. Regenerate
+with `pnpm exec playwright test --project=visual --update-snapshots`.
 
 ### 6. Production build
 
@@ -129,9 +133,9 @@ docker run -p 3000:3000 --env-file .env skeletoni
    ```ts
    // src/routes/my-route/+page.server.ts
    export function load() {
-     return {
-       meta: { title: 'My Route', description: 'What this page is about.' },
-     };
+   	return {
+   		meta: { title: 'My Route', description: 'What this page is about.' }
+   	};
    }
    ```
 
@@ -143,13 +147,13 @@ All design tokens live in `src/app.css`. To change the brand colour:
 
 ```css
 :root {
-  --brand: oklch(0.585 0.233 277); /* light-mode value — indigo by default */
-  --brand-foreground: oklch(0.985 0 0);
+	--brand: oklch(0.585 0.233 277); /* light-mode value — indigo by default */
+	--brand-foreground: oklch(0.985 0 0);
 }
 
 .dark {
-  --brand: oklch(0.673 0.201 276); /* dark-mode value — slightly lighter */
-  --brand-foreground: oklch(0.985 0 0);
+	--brand: oklch(0.673 0.201 276); /* dark-mode value — slightly lighter */
+	--brand-foreground: oklch(0.985 0 0);
 }
 ```
 
@@ -159,16 +163,16 @@ Use the token in components via Tailwind utilities: `bg-brand`, `text-brand`, `b
 
 This project uses [Conventional Commits](https://www.conventionalcommits.org/):
 
-| Prefix | When to use |
-|---|---|
-| `feat:` | New user-visible feature |
-| `fix:` | Bug fix |
+| Prefix      | When to use                             |
+| ----------- | --------------------------------------- |
+| `feat:`     | New user-visible feature                |
+| `fix:`      | Bug fix                                 |
 | `refactor:` | Code change with no user-visible effect |
-| `perf:` | Performance improvement |
-| `test:` | Adding or updating tests |
-| `chore:` | Tooling, config, deps |
-| `docs:` | Documentation only |
-| `ci:` | CI/CD pipeline |
+| `perf:`     | Performance improvement                 |
+| `test:`     | Adding or updating tests                |
+| `chore:`    | Tooling, config, deps                   |
+| `docs:`     | Documentation only                      |
+| `ci:`       | CI/CD pipeline                          |
 
 `semantic-release` reads these prefixes to determine the version bump (`feat` → minor, `fix` → patch) and generate `CHANGELOG.md` automatically on every merge to `main`.
 
