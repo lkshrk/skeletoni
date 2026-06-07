@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	// ci: temporary touch to exercise visual regression
 </script>
 
 <div class="py-16 text-center">
