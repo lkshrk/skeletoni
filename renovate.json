@@ -1,9 +1,20 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["github>lkshrk/woodpecker-ops//renovate/presets/app-library.json5"],
+	"extends": ["config:recommended"],
+	"dependencyDashboard": true,
+	"prConcurrentLimit": 10,
+	"automerge": true,
+	"automergeType": "pr",
+	"platformAutomerge": true,
+	"labels": ["dependencies"],
 	"packageRules": [
 		{
+			"matchUpdateTypes": ["minor", "patch"],
+			"automerge": true
+		},
+		{
 			"matchUpdateTypes": ["major"],
+			"automerge": true,
 			"minimumReleaseAge": "3 days"
 		}
 	]
