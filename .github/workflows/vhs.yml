@@ -30,7 +30,7 @@ jobs:
           path: demo/preview.tape
 
       - name: Commit GIF
-        uses: EndBug/add-and-commit@290ea2c423ad77ca9c62ae0f5b224379612c0321 # v10
+        uses: EndBug/add-and-commit@645ecc0dd0a57f4d86d26c0aa5fc42c0a856fbca # v11
         with:
           message: 'chore: update demo gif [skip ci]'
           add: demo/terminal.gif
