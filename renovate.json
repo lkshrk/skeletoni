@@ -7,7 +7,16 @@
 	"automergeType": "pr",
 	"platformAutomerge": true,
 	"labels": ["dependencies"],
+	"internalChecksFilter": "strict",
 	"packageRules": [
+		{
+			"matchDatasources": ["npm"],
+			"minimumReleaseAge": "3 days"
+		},
+		{
+			"matchDepNames": ["typescript"],
+			"allowedVersions": "<7"
+		},
 		{
 			"matchUpdateTypes": ["minor", "patch"],
 			"automerge": true
