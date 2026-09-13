@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/lkshrk/skeletoni/compare/v1.2.1...v1.2.2) (2026-09-13)
+
+
+### Bug Fixes
+
+* **renovate:** hold npm updates past pnpm release age ([#90](https://github.com/lkshrk/skeletoni/issues/90)) ([4369b14](https://github.com/lkshrk/skeletoni/commit/4369b14606fd082731265c78334a24614be0d4c1))
+
 ## [1.2.1](https://github.com/lkshrk/skeletoni/compare/v1.2.0...v1.2.1) (2026-05-08)
 
 
