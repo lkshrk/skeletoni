@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/lkshrk/skeletoni/compare/v1.2.2...v2.0.0) (2026-10-04)
+
+
+* feat!: migrate to SvelteKit 3 and adapter-node 6 ([#122](https://github.com/lkshrk/skeletoni/issues/122)) ([bf06777](https://github.com/lkshrk/skeletoni/commit/bf067778cc8fc10b568b46cf65f30aaf045d6999))
+
+
+### BREAKING CHANGES
+
+* require Node 22.17 and use Vite-based Kit configuration, native imports, and adapter-node 6 origin handling.
+
 ## [1.2.2](https://github.com/lkshrk/skeletoni/compare/v1.2.1...v1.2.2) (2026-09-13)
 
 
