@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import { env } from '$env/dynamic/public';
+import { PUBLIC_BASE_URL } from '$app/env/public';
 
 const routes = ['/', '/about', '/docs'] as const;
 
@@ -12,7 +12,7 @@ function escapeXml(str: string): string {
 }
 
 export const GET: RequestHandler = () => {
-	const baseUrl = escapeXml(env.PUBLIC_BASE_URL);
+	const baseUrl = escapeXml(PUBLIC_BASE_URL);
 	const today = new Date().toISOString().slice(0, 10);
 
 	const urls = routes

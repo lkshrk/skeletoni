@@ -46,7 +46,13 @@ jobs:
         run: pnpm test
 
       - name: Build
-        run: pnpm build
+        run: |
+          mv .env .env.ci
+          trap 'mv .env.ci .env' EXIT
+          pnpm build
+
+      - name: Production server smoke
+        run: node --experimental-strip-types scripts/check-production.ts
 
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium
