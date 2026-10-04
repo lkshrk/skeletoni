@@ -23,7 +23,7 @@
 		"release": "semantic-release"
 	},
 	"dependencies": {
-		"@sveltejs/kit": "^2.63.0",
+		"@sveltejs/kit": "^3.0.0",
 		"svelte": "^5.56.2"
 	},
 	"devDependencies": {
