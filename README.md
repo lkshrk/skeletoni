@@ -2,7 +2,7 @@
 
 ![Preview](demo/preview.gif)
 
-The cleanest possible SvelteKit 5 starter — opinionated, minimal, production-ready.
+The cleanest possible SvelteKit 3 / Svelte 5 starter — opinionated, minimal, production-ready.
 Every dependency earns its place. Nothing speculative.
 
 ---
@@ -11,7 +11,7 @@ Every dependency earns its place. Nothing speculative.
 
 | Responsibility       | Tool                                                                                                            | Notes                                                                                                     |
 | -------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Framework            | [SvelteKit 5](https://svelte.dev/docs/kit)                                                                      | File-based routing, SSR, `+page`, `+layout`, `+server`                                                    |
+| Framework            | [SvelteKit 3 + Svelte 5](https://svelte.dev/docs/kit)                                                           | File-based routing, SSR, `+page`, `+layout`, `+server`                                                    |
 | Language             | [TypeScript (strict)](https://www.typescriptlang.org/)                                                          | Zero runtime cost; `any` is banned                                                                        |
 | Styling              | [Tailwind CSS v4](https://tailwindcss.com/)                                                                     | Utility-first; design tokens via OKLCH CSS vars                                                           |
 | Components           | [shadcn-svelte](https://www.shadcn-svelte.com/)                                                                 | Copy-owned components; no runtime dependency bloat                                                        |
@@ -25,7 +25,7 @@ Every dependency earns its place. Nothing speculative.
 | Git hooks            | [Lefthook](https://lefthook.dev/)                                                                               | Pre-push runs `check`, `lint`, format check                                                               |
 | Bundler              | [Vite](https://vite.dev/)                                                                                       | Dev server with HMR, optimised production build                                                           |
 | Server adapter       | [@sveltejs/adapter-node](https://svelte.dev/docs/kit/adapter-node)                                              | Standalone Node.js server — Docker-friendly                                                               |
-| Containerisation     | [Docker](https://www.docker.com/)                                                                               | Multi-stage build, non-root user, Node 22                                                                 |
+| Containerisation     | [Docker](https://www.docker.com/)                                                                               | Multi-stage build, non-root user, Node 24                                                                 |
 | Releases             | [semantic-release](https://semantic-release.gitbook.io/semantic-release/)                                       | Automated versioning from Conventional Commits                                                            |
 | Dependency updates   | [Renovate](https://docs.renovatebot.com/)                                                                       | Automated PRs to keep deps fresh                                                                          |
 
@@ -51,7 +51,7 @@ The setup script prompts for project name, display name, emoji, and description 
 
 ### Prerequisites
 
-- **Node.js ≥ 22.12.0** — required for `--experimental-strip-types` (TypeScript scripts run without a transpile step)
+- **Node.js ≥ 22.17.0** — required by SvelteKit 3 (CI and Docker use Node 24)
 - **pnpm** — `npm install -g pnpm`
 - **ffmpeg** _(optional)_ — only needed to regenerate `demo/preview.gif`
 
@@ -120,6 +120,24 @@ pnpm preview        # Serve build/ locally at :4173
 docker build -t skeletoni .
 docker run -p 3000:3000 --env-file .env skeletoni
 ```
+
+Set `PUBLIC_BASE_URL` to the public site URL for canonical links and the sitemap.
+The public variables in `src/env.ts` use the `.env.example` defaults when absent,
+so the image can build without deployment settings; runtime values override them.
+Adapter-node 6 no longer accepts the `ORIGIN` environment variable. Behind a
+trusted reverse proxy, set `PROTOCOL_HEADER=x-forwarded-proto` and
+`HOST_HEADER=x-forwarded-host`, and ensure the proxy overwrites those headers.
+Do not expose an adapter configured to trust proxy headers directly to untrusted
+clients. For a fixed origin, set `paths.origin` in the `sveltekit(...)` options
+before building; it is not a runtime setting.
+
+### Framework configuration
+
+SvelteKit, Svelte compiler/preprocessor options, CSP, and Vitest live in
+`vite.config.ts`. SvelteKit 3 does not load `svelte.config.js`. Internal imports
+use the native `#lib/*` mapping in `package.json` and explicit file extensions.
+Renovate groups SvelteKit and adapter-node updates because their major versions
+must be upgraded together.
 
 ---
 

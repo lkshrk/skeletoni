@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { resolve } from '$app/paths';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import * as Sheet from '$lib/components/ui/sheet/index.js';
-	import { theme } from '$lib/theme.svelte.js';
+	import { Button } from '#lib/components/ui/button/index.js';
+	import * as Sheet from '#lib/components/ui/sheet/index.js';
+	import { theme } from '#lib/theme.svelte.js';
 	import MenuIcon from '@lucide/svelte/icons/menu';
 	import MoonIcon from '@lucide/svelte/icons/moon';
 	import SunIcon from '@lucide/svelte/icons/sun';

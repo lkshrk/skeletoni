@@ -2,16 +2,16 @@
 	import { onMount } from 'svelte';
 	import '../app.css';
 	import { page } from '$app/state';
-	import { env } from '$env/dynamic/public';
-	import { formatTitle } from '$lib/meta';
-	import { theme } from '$lib/theme.svelte.js';
-	import Navbar from '$lib/components/Navbar.svelte';
-	import Footer from '$lib/components/Footer.svelte';
+	import { PUBLIC_BASE_URL, PUBLIC_SITE_NAME } from '$app/env/public';
+	import { formatTitle } from '#lib/meta.js';
+	import { theme } from '#lib/theme.svelte.js';
+	import Navbar from '#lib/components/Navbar.svelte';
+	import Footer from '#lib/components/Footer.svelte';
 
 	const { children } = $props();
 
-	const title = $derived(formatTitle(page.data.meta.title, env.PUBLIC_SITE_NAME));
-	const canonical = $derived(`${env.PUBLIC_BASE_URL}${page.url.pathname}`);
+	const title = $derived(formatTitle(page.data.meta.title, PUBLIC_SITE_NAME));
+	const canonical = $derived(`${PUBLIC_BASE_URL}${page.url.pathname}`);
 
 	onMount(() => theme.init());
 </script>

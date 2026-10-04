@@ -25,8 +25,8 @@ ENV NODE_ENV=production \
     HOST=0.0.0.0 \
     PORT=3000
 
-# ORIGIN must be set at runtime for CSRF protection:
-# docker run -e ORIGIN=https://yourdomain.com ...
+# Behind a trusted proxy, set PROTOCOL_HEADER=x-forwarded-proto and
+# HOST_HEADER=x-forwarded-host. The proxy must overwrite these headers.
 
 RUN corepack enable
 

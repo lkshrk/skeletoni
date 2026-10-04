@@ -10,6 +10,10 @@
 	"internalChecksFilter": "strict",
 	"packageRules": [
 		{
+			"matchDepNames": ["@sveltejs/kit", "@sveltejs/adapter-node"],
+			"groupName": "SvelteKit and Node adapter"
+		},
+		{
 			"matchDatasources": ["npm"],
 			"minimumReleaseAge": "3 days"
 		},

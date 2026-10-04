@@ -1,4 +1,4 @@
-import { defaultMeta } from '$lib/meta';
+import { defaultMeta } from '#lib/meta.js';
 import type { LayoutServerLoad } from './$types';
 
 // Default meta for every route. To override on a specific page, return

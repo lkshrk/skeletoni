@@ -3,9 +3,12 @@
 	"version": "1.2.2",
 	"private": true,
 	"type": "module",
+	"imports": {
+		"#lib/*": "./src/lib/*"
+	},
 	"packageManager": "pnpm@12.8.2",
 	"engines": {
-		"node": ">=22.12.0"
+		"node": ">=22.17.0"
 	},
 	"scripts": {
 		"dev": "vite dev",
@@ -23,15 +26,15 @@
 		"release": "semantic-release"
 	},
 	"dependencies": {
-		"@sveltejs/kit": "^2.63.0",
-		"svelte": "^5.56.2"
+		"@sveltejs/kit": "^3.0.0",
+		"svelte": "^5.57.1"
 	},
 	"devDependencies": {
 		"@lucide/svelte": "^1.17.0",
 		"@playwright/test": "^1.60.0",
 		"@semantic-release/changelog": "^7.0.0",
 		"@semantic-release/git": "^11.0.0",
-		"@sveltejs/adapter-node": "^5.5.4",
+		"@sveltejs/adapter-node": "^6.0.0",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
 		"@tailwindcss/vite": "^4.3.0",
 		"@types/node": "^24.13.4",

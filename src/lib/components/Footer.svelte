@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { Separator } from '$lib/components/ui/separator/index.js';
+	import { Separator } from '#lib/components/ui/separator/index.js';
 
 	const year = new Date().getFullYear();
 </script>

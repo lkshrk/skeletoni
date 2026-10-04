@@ -1,7 +1,9 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices, type ReporterDescription } from '@playwright/test';
 import { shiplightConfig } from 'shiplightai';
 
 const shiplight = shiplightConfig();
+const reporters: ReporterDescription[] =
+	typeof shiplight.reporter === 'string' ? [[shiplight.reporter]] : (shiplight.reporter ?? []);
 
 export default defineConfig({
 	...shiplight,
@@ -10,7 +12,7 @@ export default defineConfig({
 	fullyParallel: true,
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
-	reporter: process.env.CI ? [['github'], ...shiplight.reporter] : shiplight.reporter,
+	reporter: process.env.CI ? [['github'], ...reporters] : shiplight.reporter,
 	// Absorb sub-percent font/anti-aliasing differences between the local (darwin)
 	// and CI (linux) renderers. Local-vs-local comparisons stay effectively exact.
 	expect: { toHaveScreenshot: { maxDiffPixelRatio: 0.02 } },

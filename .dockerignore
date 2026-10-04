@@ -27,5 +27,3 @@ CHANGELOG.md
 .prettierignore
 eslint.config.js
 playwright.config.ts
-vitest.config.ts
-tsconfig.json

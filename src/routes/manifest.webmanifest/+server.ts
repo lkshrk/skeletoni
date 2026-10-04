@@ -1,8 +1,8 @@
 import type { RequestHandler } from './$types';
-import { env } from '$env/dynamic/public';
+import { PUBLIC_SITE_NAME } from '$app/env/public';
 
 export const GET: RequestHandler = () => {
-	const siteName = env.PUBLIC_SITE_NAME;
+	const siteName = PUBLIC_SITE_NAME;
 
 	return new Response(
 		JSON.stringify(

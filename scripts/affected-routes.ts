@@ -34,7 +34,7 @@ const GLOBAL_TRIGGERS = new Set([
 	join(ROUTES, '+layout.ts'),
 	join(ROUTES, '+layout.server.ts'),
 	join(ROOT, 'vite.config.ts'),
-	join(ROOT, 'svelte.config.js')
+	join(ROOT, 'package.json')
 ]);
 
 // Sentinel returned when git diff itself fails (shallow clone, new branch, etc.)
@@ -72,8 +72,8 @@ function scanSrc(dir: string, out: string[] = []): string[] {
 
 function resolveImport(importPath: string, fromFile: string): string | null {
 	let abs: string;
-	if (importPath.startsWith('$lib/')) {
-		abs = join(LIB, importPath.slice('$lib/'.length));
+	if (importPath.startsWith('#lib/')) {
+		abs = join(LIB, importPath.slice('#lib/'.length));
 	} else if (importPath.startsWith('.')) {
 		abs = join(dirname(fromFile), importPath);
 	} else {
@@ -81,6 +81,7 @@ function resolveImport(importPath: string, fromFile: string): string | null {
 	}
 
 	const candidates = [
+		...(abs.endsWith('.js') ? [abs.slice(0, -3) + '.ts'] : []),
 		abs,
 		abs + '.ts',
 		abs + '.js',
