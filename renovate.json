@@ -1,6 +1,6 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["config:recommended"],
+	"extends": ["config:recommended", "github>lkshrk/gh-ops//renovate/presets/github-actions.json5"],
 	"dependencyDashboard": true,
 	"prConcurrentLimit": 10,
 	"automerge": true,
