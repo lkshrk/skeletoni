@@ -1,11 +1,10 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["config:recommended", "github>lkshrk/gh-ops//renovate/presets/github-actions.json5"],
-	"dependencyDashboard": true,
-	"prConcurrentLimit": 10,
-	"automerge": true,
-	"automergeType": "pr",
-	"platformAutomerge": true,
+	"extends": [
+		"github>lkshrk/gh-ops//renovate/presets/app-library.json5",
+		"github>lkshrk/gh-ops//renovate/presets/automerge-major.json5",
+		"helpers:pinGitHubActionDigests"
+	],
 	"labels": ["dependencies"],
 	"internalChecksFilter": "strict",
 	"packageRules": [
@@ -22,12 +21,7 @@
 			"allowedVersions": "<7"
 		},
 		{
-			"matchUpdateTypes": ["minor", "patch"],
-			"automerge": true
-		},
-		{
 			"matchUpdateTypes": ["major"],
-			"automerge": true,
 			"minimumReleaseAge": "3 days"
 		}
 	]
